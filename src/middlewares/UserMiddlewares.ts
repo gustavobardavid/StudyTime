@@ -7,7 +7,7 @@ export const checkExistsUsername = async (req: Request, res: Response, next: Nex
     try {
         const user = await prisma.user.findUnique({
             where: {
-                username: req.params.username,
+                username: req.body.username,
             },
         })
         
