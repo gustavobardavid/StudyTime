@@ -1,5 +1,6 @@
 import express, { Request, Response} from 'express';
 import { create, findMany } from '../controllers/UserController';
+import { checkExistsUserAccount } from '../middlewares/checkExistsUserAccount';
 
 const router = express.Router()
 
@@ -8,7 +9,7 @@ router.get('/users', async (req: Request, res: Response) => {
     res.json(users);
   });
 
-router.post('/users', async (req:Request, res: Response) => {
+router.post('/users', checkExistsUserAccount, async (req:Request, res: Response) => {
     const { name, username} = req.body
     if (!name || !username) {
         return res.status(400).json({ error: 'Name and username are required' });
