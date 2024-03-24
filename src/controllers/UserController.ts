@@ -1,4 +1,5 @@
-import { PrismaClient , User } from '@prisma/client'
+import { PrismaClient , User, Tecnologie } from '@prisma/client'
+import e from 'express';
 
 const prisma = new PrismaClient()
 
@@ -30,5 +31,44 @@ export const findMany = async (): Promise<User[]> => {
     return [];
   }
 };
+
+export const getUserTecnologies = async(username: string): Promise<Tecnologie[]> => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        username: username,
+      },
+      include: {
+        tecnologies: true
+      }
+    })
+    if (user) {
+      return user.tecnologies
+    } else {
+      return []
+    }
+  } catch (e) {
+    throw e
+  }
+}
+
+export const createUserTecnologie = async (username: string, tecnologie: Tecnologie): Promise<Tecnologie> => {
+  try {
+    const newTecnologie = await prisma.tecnologie.create({
+      data: {
+        title: tecnologie.title,
+        studied: tecnologie.studied,
+        user: {
+          connect: { 
+            username: username
+          }
+        }
+      }
+    })
+    return newTecnologie
+  } catch (e) {
+    throw e
+  }
+}
 
 

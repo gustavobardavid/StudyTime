@@ -1,6 +1,6 @@
 import express, { Request, Response} from 'express';
-import { create, findMany } from '../controllers/UserController';
-import { checkExistsUserAccount } from '../middlewares/checkExistsUserAccount';
+import { create, findMany, getUserTecnologies, createUserTecnologie } from '../controllers/UserController';
+import { checkExistsUserAccount, checkExistsUsername } from '../middlewares/UserMiddlewares';
 
 const router = express.Router()
 
@@ -21,5 +21,16 @@ router.post('/users', checkExistsUserAccount, async (req:Request, res: Response)
         return res.status(500).json({ error: 'Failed to create user' });
     }
 })
+
+router.get('/users/:username/tecnologies', checkExistsUsername, async(req: Request, res: Response) => {
+    const tecnologies = await getUserTecnologies(req.params.username)
+    return res.status(200).send(tecnologies)
+})
+
+router.post('/users/:username/tecnologies', checkExistsUsername, async(req: Request, res: Response) => {
+    const username = req.params.username
+    const tecnologie = await createUserTecnologie(username, req.body)
+    res.status(201).send(tecnologie)
+} )
 
 export default router
