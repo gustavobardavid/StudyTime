@@ -3,7 +3,7 @@ import e, { NextFunction, Request, Response } from 'express';
 
 const prisma = new PrismaClient();
 
-export const checkExistsUserAccount = async (req: Request, res: Response, next: NextFunction)=> {
+export const checkExistsUsername = async (req: Request, res: Response, next: NextFunction)=> {
     try {
         const user = await prisma.user.findUnique({
             where: {
@@ -21,7 +21,7 @@ export const checkExistsUserAccount = async (req: Request, res: Response, next: 
     }
 }
 
-export const checkExistsUsername = async (req: Request, res: Response, next: NextFunction)=> {
+export const checkExistsUserAccount = async (req: Request, res: Response, next: NextFunction)=> {
     try {
         const user = await prisma.user.findUnique({
             where: {
