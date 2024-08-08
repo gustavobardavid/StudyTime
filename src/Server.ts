@@ -1,7 +1,17 @@
-import app from './App';
+// server.ts
 
-const PORT = 3000
+import express from 'express';
+import bodyParser from 'body-parser';
+import userRoutes from './routes/userRoutes';
+
+const app = express();
+const PORT = 3000;
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use('/', userRoutes); 
 
 app.listen(PORT, () => {
-    console.log('Server running on 3000 port');
-})
+  console.log(`Servidor rodando na porta ${PORT}`);
+});

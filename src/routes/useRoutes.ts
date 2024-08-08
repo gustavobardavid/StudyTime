@@ -1,7 +1,7 @@
 import express, { Request, Response} from 'express';
 import { create, findMany, getUserTecnologies, createUserTecnologie } from '../controllers/UserController';
 import { checkExistsUserAccount, checkExistsUsername } from '../middlewares/UserMiddlewares';
-import { addUser, addUserTecnologie, fetchUserTecnologies, getUsers } from '../model/UserModel';
+import { addUser, addUserTecnologie, fetchUserTecnologies, getUsers } from '../models/UserModel';
 
 const router = express.Router()
 
