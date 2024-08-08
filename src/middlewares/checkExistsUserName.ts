@@ -1,6 +1,5 @@
 
 import { Request, Response, NextFunction } from 'express';
-import { getUsers } from '../models/UserModel';
 import { findMany } from '../controllers/UserController';
 
 
