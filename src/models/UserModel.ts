@@ -71,4 +71,22 @@ export const createUserTecnologie = async (username: string, tecnologie: Tecnolo
   }
 }
 
-
+export const markAsStudied = async (username: string, technologieId: string): Promise<boolean> => {
+  try {
+    const result = await prisma.tecnologie.updateMany({
+      where: {
+        id: parseInt(technologieId),
+        user: {
+          username: username
+        }
+      },
+      data: {
+        studied: true
+      }
+    });
+    return result.count > 0;
+  } catch (error) {
+    console.error('Error marking tecnologie as studied:', error);
+    return false;
+  }
+};
