@@ -1,6 +1,6 @@
 
 import { Request, Response, NextFunction } from 'express';
-import { findMany } from '../controllers/UserController';
+import { findMany } from '../models/UserModel';
 
 
 export const checkExistsUserName = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
@@ -9,7 +9,7 @@ export const checkExistsUserName = async (req: Request, res: Response, next: Nex
   const user = usersNoBanco.find(u => u.username === userName);
     
   if (user) {
-    res.status(404).json({ message: 'Username já está em uso.' });
+    res.status(404).json({ message: `Username ${user.username} is already in use. Please, choose another username` });
     return;
   }
   next();

@@ -1,8 +1,7 @@
 import express, { Router } from 'express';
-import { create, findMany, getUserTecnologies, createUserTecnologie } from '../controllers/UserController';
-import { addUser, addUserTecnologie, fetchUserTecnologies, getUsers } from '../models/UserModel';
+import { addUser, addUserTecnologie, fetchUserTecnologies, getUsers } from '../controllers/UserController';
 import { checkExistsUserName } from '../middlewares/checkExistsUserName';
-import { checkExistsUserAccount } from '../middlewares/checkExistsUseraccount';
+import { checkExistsUserAccount } from '../middlewares/checkExistsUserAccount';
 
 const router = express.Router()
 
