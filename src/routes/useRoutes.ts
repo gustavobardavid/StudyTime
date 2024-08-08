@@ -10,8 +10,8 @@ router.post('/users', checkExistsUserName, addUser)
 
 router.get('/users', getUsers)
   
-router.get('/users/:username/technologies', checkExistsUserAccount, fetchUserTecnologies)
+router.get('/:username/technologies', checkExistsUserAccount, fetchUserTecnologies)
 
-router.post('/users/:username/technologies', checkExistsUserAccount, addUserTecnologie )
+router.post('/:username/technologies', checkExistsUserAccount, addUserTecnologie )
 
 export default router
